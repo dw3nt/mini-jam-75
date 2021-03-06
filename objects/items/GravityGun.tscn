@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://assets/images/tilemap_packed.png" type="Texture" id=2]
+
+[node name="GravityGun" type="Node2D"]
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 336, 483, 21, 21 )
+
+[node name="BulletSpawnPoint" type="Position2D" parent="."]
+position = Vector2( 5, 0 )

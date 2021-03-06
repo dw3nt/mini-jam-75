@@ -25,7 +25,7 @@ func physics_process(delta):
 			else:
 				fsm.velocity.x = runInput * AIR_MOVE_SPEED
 				
-			fsm.sprite.flip_h = runInput < 0
+			fsm.setFacingDirection(runInput)
 			
 		else:
 			fsm.velocity.x = lerp(fsm.velocity.x, 0, AIR_RESISTANCE)

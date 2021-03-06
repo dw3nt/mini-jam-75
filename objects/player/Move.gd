@@ -22,7 +22,7 @@ func physics_process(delta):
 		fsm.change_state("Idle")
 	else:
 		fsm.velocity.x = runInput * MOVE_SPEED
-		fsm.sprite.flip_h = runInput < 0
+		fsm.setFacingDirection(runInput)
 	
 	
 func exit_state():

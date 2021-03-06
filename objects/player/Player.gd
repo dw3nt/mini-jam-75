@@ -1,7 +1,11 @@
 extends KinematicBody2D
 
+signal bullet_fired(target, isResetCharge)
+
 const INERTIA = 10
 
+onready var bulletSpawnPost = $GravityGun/BulletSpawnPoint
+onready var sprite = $Sprite
 onready var stateMachine = $PlayerStateMachine
 
 
@@ -31,4 +35,9 @@ func _physics_process(delta):
 	
 	
 func _input(event):
-	stateMachine.state.input(event)
+	if event.is_action_pressed("shoot_float_charge"):
+		emit_signal("bullet_fired", get_global_mouse_position(), false)
+	elif event.is_action_pressed("shoot_reset_charge"):
+		emit_signal("bullet_fired", get_global_mouse_position(), true)
+	else:
+		stateMachine.state.input(event)

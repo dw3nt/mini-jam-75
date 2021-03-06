@@ -11,8 +11,11 @@ const AIR_MOVE_SPEED = 80
 const AIR_RESISTANCE = 0.75
 const AIR_SPEED_SLOW_BY = 0.005
 
+const GRAVITY_GUN_INITIAL_POS = Vector2(10, -8)
+
 export(NodePath) var animationPlayerPath
 export(NodePath) var spritePath
+export(NodePath) var gravityGunPath
 
 var state
 var isOnFloor = false
@@ -24,6 +27,7 @@ var history = []
 
 var anim
 var sprite
+var gravityGun
 
 
 func ready():
@@ -34,6 +38,9 @@ func ready():
 		
 	if spritePath:
 		sprite = get_node(spritePath)
+		
+	if gravityGunPath:
+		gravityGun = get_node(gravityGunPath)
 	
 	if anim:
 		anim.connect("animation_finished", self, "_on_FSM_Anim_animation_finished")
@@ -80,6 +87,12 @@ func animation_finished(anim_name):
 	
 func exit_state():
 	pass
+	
+
+func setFacingDirection(facing):
+	sprite.flip_h = facing < 0
+	gravityGun.scale.x = facing
+	gravityGun.position.x = facing * GRAVITY_GUN_INITIAL_POS.x
 	
 	
 func _on_FSM_Anim_animation_finished(anim_name):
