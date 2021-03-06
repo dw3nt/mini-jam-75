@@ -1,6 +1,6 @@
 extends RigidBody2D
 
-const IMPULSE_FORCE = 50
+const IMPULSE_FORCE = 500
 const DAMP_FORCE = 5
 
 var floatCharges = 0 setget setFloatCharges
@@ -21,6 +21,8 @@ func setFloatCharges(val):
 	
 	
 func resetGravity():
-	floatCharges = 0	# don't want to trigger setter
-	gravity_scale = 1.5
-	linear_damp = -1
+	if floatCharges > 0:
+		floatCharges = 0	# don't want to trigger setter
+		gravity_scale = 1.5
+		linear_damp = -1
+		apply_central_impulse(Vector2.DOWN * 5)	# re apply an impulse to retrigger gravity changes
