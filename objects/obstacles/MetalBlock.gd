@@ -2,15 +2,17 @@ extends RigidBody2D
 
 const IMPULSE_FORCE = 500
 const DAMP_FORCE = 5
+const MAX_CHARGES = 3
 
 var floatCharges = 0 setget setFloatCharges
 		
 		
 func setFloatCharges(val):
-	floatCharges = val
-	gravity_scale = 0
-	linear_damp = DAMP_FORCE / val
-	apply_central_impulse(Vector2.UP * IMPULSE_FORCE * val)
+	floatCharges = min(val, MAX_CHARGES)
+	if val <= MAX_CHARGES:
+		gravity_scale = 0
+		linear_damp = DAMP_FORCE / floatCharges
+		apply_central_impulse(Vector2.UP * IMPULSE_FORCE * floatCharges)
 	
 	
 func addFloatCharge():
