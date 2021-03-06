@@ -7,9 +7,9 @@ const HISTORY_LIMIT = 10
 const INITIAL_GRAVITY = 10
 const FRICTION = 1
 const MOVE_SPEED = 100
-const AIR_MOVE_SPEED = 50
+const AIR_MOVE_SPEED = 80
 const AIR_RESISTANCE = 0.75
-const AIR_SPEED_SLOW_BY = 0.01
+const AIR_SPEED_SLOW_BY = 0.005
 
 export(NodePath) var animationPlayerPath
 export(NodePath) var spritePath
