@@ -30,7 +30,7 @@ func _physics_process(delta):
 	for index in get_slide_count():
 		var collision = get_slide_collision(index)
 		if collision.collider.is_in_group('moveable_obstacle'):
-			if collision.normal.round() == Vector2.DOWN:
+			if collision.normal.round() == Vector2.DOWN && collision.collider.floatCharges == 0:
 				if stateMachine.state.name != "Dead":
 					stateMachine.change_state("Dead")
 					emit_signal("player_death_triggered")

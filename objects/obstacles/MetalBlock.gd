@@ -4,10 +4,18 @@ const IMPULSE_FORCE = 500
 const DAMP_FORCE = 5
 const MAX_CHARGES = 3
 
+export(int) var initialFloatCharges = 0
+
 var floatCharges = 0 setget setFloatCharges
 
 onready var floatAudio = $FloatAudio
 onready var resetAudio = $ResetAudio
+
+
+func _ready():
+	if initialFloatCharges > 0:
+		gravity_scale = 0
+		floatCharges = initialFloatCharges
 		
 		
 func setFloatCharges(val):
