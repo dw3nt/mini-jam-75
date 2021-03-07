@@ -20,6 +20,7 @@ onready var bulletsWrap = $Bullets
 onready var ammoLabel = $CanvasLayer/GameInterface/MarginContainer/HBoxContainer/Ammo
 onready var pauseMenu = $CanvasLayer/PauseMenu
 onready var levelCompleteMenu = $CanvasLayer/LevelCompleteMenu
+onready var levelFailMenu = $CanvasLayer/LevelFailedMenu
 onready var player = $Player
 onready var levelGoal = $LevelGoal
 
@@ -33,6 +34,7 @@ func _ready():
 	initLevel(currentLevelScene)
 	
 	player.connect("bullet_fired", self, "_on_Player_bullet_fired")
+	player.connect("player_death_triggered", self, "_on_Player_player_death_triggered")
 	
 	emit_signal("room_ready")
 	
@@ -93,6 +95,13 @@ func _on_Player_bullet_fired(target, isResetCharge):
 			currentLevel.floatAmmo -= 1
 			ammoLabel.text = str(currentLevel.floatAmmo)
 			floatBulletAudio.play()
+			
+			
+func _on_Player_player_death_triggered():
+	yield(get_tree().create_timer(1.0), "timeout")
+	levelFailMenu.anim.play("fade_in")
+	isPaused = true
+	get_tree().paused = true
 
 
 func _on_LevelGoal_body_entered(body):
@@ -124,3 +133,18 @@ func _on_LevelCompleteMenuNextLevelButton_pressed():
 		isPaused = false
 		get_tree().paused = false
 		levelCompleteMenu.anim.play("fade_out")
+
+
+func _on_LevelFailMenuMenuButton_pressed():
+	emit_signal("room_change_requested", MAIN_MENU_SCENE)
+
+
+func _on_LevelFailMenuRetryLevelButton_pressed():
+	var currentLevelScene = load(currentLevel.filename).instance()
+	resetLevelAudio.play()
+	isPaused = false
+	get_tree().paused = false
+	player.stateMachine.change_state("Idle")
+	yield(get_tree().create_timer(0.25), "timeout")
+	levelFailMenu.anim.play("fade_out")
+	call_deferred("initLevel", currentLevelScene)

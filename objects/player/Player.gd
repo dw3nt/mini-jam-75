@@ -1,6 +1,7 @@
 extends KinematicBody2D
 
 signal bullet_fired(target, isResetCharge)
+signal player_death_triggered
 
 const INERTIA = 10
 const MAX_FLOAT_CHARGES = 3
@@ -32,6 +33,7 @@ func _physics_process(delta):
 			if collision.normal.round() == Vector2.DOWN:
 				if stateMachine.state.name != "Dead":
 					stateMachine.change_state("Dead")
+					emit_signal("player_death_triggered")
 			else:
 				collision.collider.apply_central_impulse(-collision.normal * INERTIA)
 				if collision.normal == Vector2.UP:

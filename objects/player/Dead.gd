@@ -30,7 +30,7 @@ func enter_state():
 	
 func physics_process(delta):
 	fsm.velocity.y += INITIAL_GRAVITY
-	
+
 	
 func exit_state():
 	pass

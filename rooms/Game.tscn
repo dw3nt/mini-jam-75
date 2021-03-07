@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://rooms/levels/Level1.tscn" type="PackedScene" id=1]
 [ext_resource path="res://objects/player/Player.tscn" type="PackedScene" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://assets/sounds/reset.wav" type="AudioStream" id=8]
 [ext_resource path="res://menus/PauseMenu.tscn" type="PackedScene" id=9]
 [ext_resource path="res://menus/LevelCompleteMenu.tscn" type="PackedScene" id=10]
+[ext_resource path="res://menus/LevelFailedMenu.tscn" type="PackedScene" id=11]
 
 [node name="Game" type="Node2D"]
 pause_mode = 2
@@ -55,12 +56,18 @@ position = Vector2( 336, 210 )
 pause_mode = 2
 
 [node name="LevelCompleteMenu" parent="CanvasLayer" instance=ExtResource( 10 )]
+
+[node name="LevelFailedMenu" parent="CanvasLayer" instance=ExtResource( 11 )]
 [connection signal="body_entered" from="LevelGoal" to="." method="_on_LevelGoal_body_entered"]
 [connection signal="pressed" from="CanvasLayer/PauseMenu/MarginContainer/CenterContainer/VBoxContainer/ButtonsContainer/ResumeButton" to="." method="_on_PauseMenuResumeButton_pressed"]
 [connection signal="pressed" from="CanvasLayer/PauseMenu/MarginContainer/CenterContainer/VBoxContainer/ButtonsContainer/MenuButton" to="." method="_on_PauseMenuMenuButton_pressed"]
 [connection signal="pressed" from="CanvasLayer/LevelCompleteMenu/MarginContainer/CenterContainer/VBoxContainer/NextLevelButton" to="." method="_on_LevelCompleteMenuNextLevelButton_pressed"]
 [connection signal="pressed" from="CanvasLayer/LevelCompleteMenu/MarginContainer/CenterContainer/VBoxContainer/MenuButton" to="." method="_on_LevelCompleteMenuMenuButton_pressed"]
+[connection signal="pressed" from="CanvasLayer/LevelFailedMenu/MarginContainer/CenterContainer/VBoxContainer/RetryLevelButton" to="." method="_on_LevelFailMenuRetryLevelButton_pressed"]
+[connection signal="pressed" from="CanvasLayer/LevelFailedMenu/MarginContainer/CenterContainer/VBoxContainer/MenuButton" to="." method="_on_LevelFailMenuMenuButton_pressed"]
 
 [editable path="CanvasLayer/PauseMenu"]
 
 [editable path="CanvasLayer/LevelCompleteMenu"]
+
+[editable path="CanvasLayer/LevelFailedMenu"]
