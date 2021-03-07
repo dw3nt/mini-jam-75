@@ -1,0 +1,98 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://rooms/WorldTiles.tscn" type="PackedScene" id=1]
+[ext_resource path="res://menus/MainMenu.gd" type="Script" id=2]
+[ext_resource path="res://fonts/BitingMyNails.otf" type="DynamicFontData" id=3]
+[ext_resource path="res://fonts/title-font.tres" type="DynamicFont" id=4]
+[ext_resource path="res://menus/MenuButton.tscn" type="PackedScene" id=5]
+
+[sub_resource type="DynamicFont" id=1]
+size = 12
+outline_size = 1
+outline_color = Color( 0.364706, 0.403922, 0.403922, 1 )
+font_data = ExtResource( 3 )
+
+[node name="MainMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TileMap" parent="." instance=ExtResource( 1 )]
+tile_data = PoolIntArray( 917504, 0, 3, 917505, 0, 3, 917506, 0, 3, 917507, 0, 3, 917508, 0, 3, 917509, 0, 3, 917510, 0, 3, 917511, 0, 3, 917512, 0, 3, 917513, 0, 3, 917514, 0, 3, 917515, 0, 3, 917516, 0, 3, 917517, 0, 3, 917518, 0, 3, 917519, 0, 3, 917520, 0, 3, 917521, 0, 3, 917522, 0, 3, 917523, 0, 3, 917524, 0, 3, 917525, 0, 3, 917526, 0, 3, 917527, 0, 3, 917528, 0, 3 )
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 21
+custom_constants/margin_top = 21
+custom_constants/margin_left = 21
+custom_constants/margin_bottom = 42
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer"]
+margin_left = 21.0
+margin_top = 21.0
+margin_right = 504.0
+margin_bottom = 273.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/CenterContainer"]
+margin_left = 106.0
+margin_top = 23.0
+margin_right = 377.0
+margin_bottom = 228.0
+custom_constants/separation = 42
+
+[node name="TitleContainer" type="VBoxContainer" parent="MarginContainer/CenterContainer/VBoxContainer"]
+margin_right = 271.0
+margin_bottom = 60.0
+
+[node name="TitleLabel" type="Label" parent="MarginContainer/CenterContainer/VBoxContainer/TitleContainer"]
+margin_right = 271.0
+margin_bottom = 43.0
+custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color = Color( 0.337255, 0.580392, 1, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+text = "Gravitron"
+
+[node name="AuthorLabel" type="Label" parent="MarginContainer/CenterContainer/VBoxContainer/TitleContainer"]
+margin_top = 47.0
+margin_right = 271.0
+margin_bottom = 60.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_outline_modulate = Color( 0.364706, 0.403922, 0.403922, 1 )
+text = "by Dual Wield Entertainment"
+align = 1
+
+[node name="ButtonContainer" type="VBoxContainer" parent="MarginContainer/CenterContainer/VBoxContainer"]
+margin_top = 102.0
+margin_right = 271.0
+margin_bottom = 205.0
+custom_constants/separation = 11
+
+[node name="PlayButton" parent="MarginContainer/CenterContainer/VBoxContainer/ButtonContainer" instance=ExtResource( 5 )]
+margin_left = 71.0
+margin_right = 199.0
+text = "Play"
+
+[node name="CreditButton" parent="MarginContainer/CenterContainer/VBoxContainer/ButtonContainer" instance=ExtResource( 5 )]
+margin_left = 71.0
+margin_top = 38.0
+margin_right = 199.0
+margin_bottom = 65.0
+text = "Credits"
+
+[node name="QuitButton" parent="MarginContainer/CenterContainer/VBoxContainer/ButtonContainer" instance=ExtResource( 5 )]
+margin_left = 71.0
+margin_top = 76.0
+margin_right = 199.0
+margin_bottom = 103.0
+text = "Quit"
+[connection signal="pressed" from="MarginContainer/CenterContainer/VBoxContainer/ButtonContainer/PlayButton" to="." method="_on_PlayButton_pressed"]
+[connection signal="pressed" from="MarginContainer/CenterContainer/VBoxContainer/ButtonContainer/CreditButton" to="." method="_on_CreditButton_pressed"]
+[connection signal="pressed" from="MarginContainer/CenterContainer/VBoxContainer/ButtonContainer/QuitButton" to="." method="_on_QuitButton_pressed"]
