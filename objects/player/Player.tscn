@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://assets/images/tilemap_packed.png" type="Texture" id=1]
 [ext_resource path="res://objects/player/Player.gd" type="Script" id=2]
@@ -9,6 +9,9 @@
 [ext_resource path="res://objects/player/Jump.gd" type="Script" id=7]
 [ext_resource path="res://objects/player/Dead.gd" type="Script" id=8]
 [ext_resource path="res://objects/items/GravityGun.tscn" type="PackedScene" id=9]
+[ext_resource path="res://assets/sounds/jump_quick.wav" type="AudioStream" id=10]
+[ext_resource path="res://assets/sounds/death_falling.wav" type="AudioStream" id=11]
+[ext_resource path="res://assets/sounds/running.wav" type="AudioStream" id=12]
 
 [sub_resource type="Animation" id=5]
 resource_name = "Dead"
@@ -160,6 +163,20 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 8, 9 ]
 }
+tracks/1/type = "method"
+tracks/1/path = NodePath("PlayerStateMachine/Move/AudioStreamPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ 0.0 ],
+"method": "play"
+} ]
+}
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 6, 8 )
@@ -167,7 +184,7 @@ extents = Vector2( 6, 8 )
 [node name="Player" type="KinematicBody2D" groups=[
 "player",
 ]]
-collision_mask = 6
+collision_mask = 0
 script = ExtResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -180,6 +197,7 @@ anims/Move = SubResource( 3 )
 position = Vector2( 0, -10 )
 texture = ExtResource( 1 )
 hframes = 10
+frame = 8
 region_enabled = true
 region_rect = Rect2( 420, 0, 210, 21 )
 
@@ -202,11 +220,24 @@ script = ExtResource( 4 )
 [node name="Move" type="Node2D" parent="PlayerStateMachine"]
 script = ExtResource( 5 )
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="PlayerStateMachine/Move"]
+stream = ExtResource( 12 )
+volume_db = -15.0
+
 [node name="Fall" type="Node2D" parent="PlayerStateMachine"]
 script = ExtResource( 6 )
 
 [node name="Jump" type="Node2D" parent="PlayerStateMachine"]
 script = ExtResource( 7 )
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="PlayerStateMachine/Jump"]
+stream = ExtResource( 10 )
+volume_db = -5.0
+
 [node name="Dead" type="Node2D" parent="PlayerStateMachine"]
 script = ExtResource( 8 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="PlayerStateMachine/Dead"]
+stream = ExtResource( 11 )
+volume_db = -5.0
+pitch_scale = 0.75

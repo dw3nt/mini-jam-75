@@ -11,6 +11,8 @@ var isResetBullet = false
 onready var sprite = $Sprite
 onready var collisionShape = $CollisionShape2D
 onready var anim = $AnimationPlayer
+onready var bounceAudio = $BounceAudio
+onready var wallAudio = $WallAudio
 
 
 func _ready():
@@ -47,7 +49,9 @@ func _physics_process(delta):
 			elif collision.collider.is_in_group('reflecting') && canApplyCharge && canBounce:
 				moveDir = moveDir.bounce(collision.normal)
 				look_at(global_position + (moveDir * 100))
+				bounceAudio.play()
 				canBounce = false
 				set_deferred("canBounce", true)	 # let it bounce of other mirrors, but only hit current mirror once
 			elif collision.collider is TileMap:
 				stopBullet()
+				wallAudio.play()

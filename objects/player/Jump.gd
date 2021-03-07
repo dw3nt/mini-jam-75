@@ -4,6 +4,8 @@ const JUMP_FORCE = -200
 
 var fsm
 
+onready var audio = $AudioStreamPlayer
+
 
 func ready():
 	pass
@@ -12,6 +14,7 @@ func ready():
 func enter_state():
 	fsm.velocity.y = JUMP_FORCE
 	fsm.anim.play("Jump")
+	audio.play()
 
 
 func physics_process(delta):

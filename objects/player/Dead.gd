@@ -6,6 +6,8 @@ const KNOCK_BACK_FORCE = 40
 var fsm
 var facing = 0
 
+onready var audio = $AudioStreamPlayer
+
 
 func ready():
 	pass
@@ -13,6 +15,8 @@ func ready():
 	
 func enter_state():
 	fsm.anim.play("Dead")
+	audio.play()
+	
 	if fsm.sprite.flip_h:
 		facing = 1
 	else:

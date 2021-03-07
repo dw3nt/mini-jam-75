@@ -5,6 +5,9 @@ const DAMP_FORCE = 5
 const MAX_CHARGES = 3
 
 var floatCharges = 0 setget setFloatCharges
+
+onready var floatAudio = $FloatAudio
+onready var resetAudio = $ResetAudio
 		
 		
 func setFloatCharges(val):
@@ -13,6 +16,7 @@ func setFloatCharges(val):
 		gravity_scale = 0
 		linear_damp = DAMP_FORCE / floatCharges
 		apply_central_impulse(Vector2.UP * IMPULSE_FORCE * floatCharges)
+		floatAudio.play()
 	
 	
 func addFloatCharge():
@@ -25,3 +29,4 @@ func resetGravity():
 		gravity_scale = 1.5
 		linear_damp = -1
 		apply_central_impulse(Vector2.DOWN * 5)	# re apply an impulse to retrigger gravity changes
+		resetAudio.play()

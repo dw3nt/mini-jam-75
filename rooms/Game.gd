@@ -7,11 +7,15 @@ const BULLET_SCENE = preload("res://objects/items/Bullet.tscn")
 
 var currentLevel = null
 
+onready var goalAudio = $LevelGoalAudio
+onready var floatBulletAudio = $FloatBulletAudio
+onready var resetFloatBulletAudio = $ResetFloatBulletAudio
+onready var resetLevelAudio = $ResetLevelAudio
 onready var levelWrap = $Level
 onready var bulletsWrap = $Bullets
+onready var ammoLabel = $CanvasLayer/GameInterface/MarginContainer/HBoxContainer/Ammo
 onready var player = $Player
 onready var levelGoal = $LevelGoal
-onready var ammoLabel = $CanvasLayer/GameInterface/MarginContainer/HBoxContainer/Ammo
 
 
 func _ready():
@@ -35,11 +39,15 @@ func initLevel(newLevel):
 	levelGoal.global_position = currentLevel.goalSpawnPos.position
 	ammoLabel.text = str(currentLevel.floatAmmo)
 	
+	for bullet in bulletsWrap.get_children():
+		bullet.queue_free()
+	
 	
 func _input(event):
 	if event.is_action_pressed("reset_level"):
 		var currentLevelScene = load(currentLevel.filename).instance()
 		initLevel(currentLevelScene)
+		resetLevelAudio.play()
 	
 	
 func _on_Player_bullet_fired(target, isResetCharge):
@@ -54,11 +62,14 @@ func _on_Player_bullet_fired(target, isResetCharge):
 		
 		if isResetCharge:
 			inst.setAsReset()
+			resetFloatBulletAudio.play()
 		else:
 			currentLevel.floatAmmo -= 1
 			ammoLabel.text = str(currentLevel.floatAmmo)
+			floatBulletAudio.play()
 
 
 func _on_LevelGoal_body_entered(body):
+	goalAudio.play()
 	if currentLevel.nextLevelScene:
 		initLevel(currentLevel.nextLevelScene.instance())

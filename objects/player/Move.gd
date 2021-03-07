@@ -2,6 +2,8 @@ extends PlayerStateMachine
 
 var fsm
 
+onready var audio = $AudioStreamPlayer
+
 
 func ready():
 	pass
@@ -9,6 +11,7 @@ func ready():
 
 func enter_state():
 	fsm.anim.play("Move")
+	audio.play()
 	
 	
 func physics_process(delta):
