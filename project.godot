@@ -121,4 +121,5 @@ reset_level={
 
 [rendering]
 
+environment/default_clear_color=Color( 0.54902, 0.956863, 1, 1 )
 environment/default_environment="res://default_env.tres"
