@@ -1,0 +1,78 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://fonts/title-font.tres" type="DynamicFont" id=1]
+[ext_resource path="res://menus/MenuButton.tscn" type="PackedScene" id=2]
+[ext_resource path="res://menus/menu-fade-out.tres" type="Animation" id=3]
+[ext_resource path="res://menus/menu-fade-in.tres" type="Animation" id=4]
+[ext_resource path="res://menus/LevelCompleteMenu.gd" type="Script" id=5]
+
+[node name="LevelCompleteMenu" type="Control"]
+visible = false
+modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.490196 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 21
+custom_constants/margin_top = 21
+custom_constants/margin_left = 21
+custom_constants/margin_bottom = 42
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer"]
+margin_left = 21.0
+margin_top = 21.0
+margin_right = 504.0
+margin_bottom = 273.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/CenterContainer"]
+margin_left = 22.0
+margin_top = 56.0
+margin_right = 460.0
+margin_bottom = 195.0
+custom_constants/separation = 21
+
+[node name="TitleLabel" type="Label" parent="MarginContainer/CenterContainer/VBoxContainer"]
+margin_right = 438.0
+margin_bottom = 43.0
+custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color = Color( 0.337255, 0.580392, 1, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+text = "Level Complete"
+align = 1
+
+[node name="NextLevelButton" parent="MarginContainer/CenterContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_left = 155.0
+margin_top = 64.0
+margin_right = 283.0
+margin_bottom = 91.0
+disabled = true
+text = "Next"
+
+[node name="MenuButton" parent="MarginContainer/CenterContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_left = 155.0
+margin_top = 112.0
+margin_right = 283.0
+margin_bottom = 139.0
+disabled = true
+text = "Menu"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/fade_in = ExtResource( 4 )
+anims/fade_out = ExtResource( 3 )

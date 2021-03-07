@@ -19,6 +19,7 @@ onready var levelWrap = $Level
 onready var bulletsWrap = $Bullets
 onready var ammoLabel = $CanvasLayer/GameInterface/MarginContainer/HBoxContainer/Ammo
 onready var pauseMenu = $CanvasLayer/PauseMenu
+onready var levelCompleteMenu = $CanvasLayer/LevelCompleteMenu
 onready var player = $Player
 onready var levelGoal = $LevelGoal
 
@@ -96,8 +97,13 @@ func _on_Player_bullet_fired(target, isResetCharge):
 
 func _on_LevelGoal_body_entered(body):
 	goalAudio.play()
+	levelCompleteMenu.anim.play("fade_in")
+	isPaused = true
+	get_tree().paused = true
 	if currentLevel.nextLevelScene:
-		initLevel(currentLevel.nextLevelScene.instance())
+		levelCompleteMenu.nextLevelButton.visible = true
+	else:
+		levelCompleteMenu.nextLevelButton.visible = false
 
 
 func _on_PauseMenuMenuButton_pressed():
@@ -106,3 +112,15 @@ func _on_PauseMenuMenuButton_pressed():
 
 func _on_PauseMenuResumeButton_pressed():
 	processPause()
+
+
+func _on_LevelCompleteMenuMenuButton_pressed():
+	emit_signal("room_change_requested", MAIN_MENU_SCENE)
+
+
+func _on_LevelCompleteMenuNextLevelButton_pressed():
+	if currentLevel.nextLevelScene:
+		initLevel(currentLevel.nextLevelScene.instance())
+		isPaused = false
+		get_tree().paused = false
+		levelCompleteMenu.anim.play("fade_out")
