@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://fonts/text-font.tres" type="DynamicFont" id=1]
+[ext_resource path="res://rooms/LevelHelpText.gd" type="Script" id=2]
+
+[node name="LevelHelpText" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_right = 1.0
+margin_bottom = 84.0
+custom_constants/margin_right = 42
+custom_constants/margin_top = 42
+custom_constants/margin_left = 42
+custom_constants/margin_bottom = 42
+
+[node name="Label" type="Label" parent="MarginContainer"]
+margin_left = 42.0
+margin_top = 42.0
+margin_right = 483.0
+margin_bottom = 59.0
+custom_fonts/font = ExtResource( 1 )
+text = "Help text"
+align = 1
