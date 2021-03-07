@@ -17,6 +17,7 @@ custom_styles/focus = ExtResource( 3 )
 custom_styles/disabled = ExtResource( 3 )
 custom_styles/normal = ExtResource( 3 )
 custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color_disabled = Color( 1, 1, 1, 1 )
 text = "Test"
 __meta__ = {
 "_edit_use_anchors_": false

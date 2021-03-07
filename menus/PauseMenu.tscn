@@ -1,0 +1,182 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://fonts/title-font.tres" type="DynamicFont" id=1]
+[ext_resource path="res://menus/MenuButton.tscn" type="PackedScene" id=2]
+[ext_resource path="res://menus/PauseMenu.gd" type="Script" id=3]
+
+[sub_resource type="Animation" id=1]
+resource_name = "fade_in"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.25 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("MarginContainer/CenterContainer/VBoxContainer/ButtonsContainer/ResumeButton:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.25 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("MarginContainer/CenterContainer/VBoxContainer/ButtonsContainer/MenuButton:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.25 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath(".:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "fade_out"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.25 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("MarginContainer/CenterContainer/VBoxContainer/ButtonsContainer/ResumeButton:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.25 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("MarginContainer/CenterContainer/VBoxContainer/ButtonsContainer/MenuButton:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.25 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath(".:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.25 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[node name="PauseMenu" type="Control"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.490196 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 21
+custom_constants/margin_top = 21
+custom_constants/margin_left = 21
+custom_constants/margin_bottom = 42
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer"]
+margin_left = 21.0
+margin_top = 21.0
+margin_right = 504.0
+margin_bottom = 273.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/CenterContainer"]
+margin_left = 143.0
+margin_top = 46.0
+margin_right = 340.0
+margin_bottom = 206.0
+custom_constants/separation = 42
+
+[node name="PausedTitle" type="Label" parent="MarginContainer/CenterContainer/VBoxContainer"]
+margin_right = 197.0
+margin_bottom = 43.0
+custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color = Color( 0.337255, 0.580392, 1, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+text = "Paused"
+
+[node name="ButtonsContainer" type="VBoxContainer" parent="MarginContainer/CenterContainer/VBoxContainer"]
+margin_top = 85.0
+margin_right = 197.0
+margin_bottom = 160.0
+custom_constants/separation = 21
+
+[node name="ResumeButton" parent="MarginContainer/CenterContainer/VBoxContainer/ButtonsContainer" instance=ExtResource( 2 )]
+margin_left = 34.0
+margin_right = 162.0
+disabled = true
+text = "Resume"
+
+[node name="MenuButton" parent="MarginContainer/CenterContainer/VBoxContainer/ButtonsContainer" instance=ExtResource( 2 )]
+margin_left = 34.0
+margin_top = 48.0
+margin_right = 162.0
+margin_bottom = 75.0
+disabled = true
+text = "Menu"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/fade_in = SubResource( 1 )
+anims/fade_out = SubResource( 2 )
+[connection signal="pressed" from="MarginContainer/CenterContainer/VBoxContainer/ButtonsContainer/MenuButton" to="." method="_on_MenuButton_pressed"]
