@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
 [ext_resource path="res://menus/Splash.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/sounds/JimHall-Wanderlust.ogg" type="AudioStream" id=3]
 
 [sub_resource type="Animation" id=1]
 resource_name = "black_fade_in"
@@ -86,6 +87,9 @@ __meta__ = {
 [node name="MusicManager" type="Node" parent="."]
 
 [node name="AudioStream1" type="AudioStreamPlayer" parent="MusicManager"]
+stream = ExtResource( 3 )
+volume_db = -10.0
+autoplay = true
 
 [node name="AudioStream2" type="AudioStreamPlayer" parent="MusicManager"]
 

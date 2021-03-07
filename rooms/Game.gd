@@ -3,6 +3,7 @@ extends Node2D
 signal room_ready
 signal room_change_requested
 
+const CURSOR_AIMER = preload("res://assets/images/aimer.png")
 const BULLET_SCENE = preload("res://objects/items/Bullet.tscn")
 
 var currentLevel = null
@@ -19,6 +20,7 @@ onready var levelGoal = $LevelGoal
 
 
 func _ready():
+	Input.set_custom_mouse_cursor(CURSOR_AIMER, 0, Vector2(5,5))
 	currentLevel = levelWrap.get_child(0)
 	var currentLevelScene = load(currentLevel.filename).instance()
 	initLevel(currentLevelScene)
@@ -26,6 +28,10 @@ func _ready():
 	player.connect("bullet_fired", self, "_on_Player_bullet_fired")
 	
 	emit_signal("room_ready")
+	
+	
+func _exit_tree():
+	Input.set_custom_mouse_cursor(null)
 	
 	
 func initLevel(newLevel):
