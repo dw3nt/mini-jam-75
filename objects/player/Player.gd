@@ -3,6 +3,10 @@ extends KinematicBody2D
 signal bullet_fired(target, isResetCharge)
 
 const INERTIA = 10
+const MAX_FLOAT_CHARGES = 3
+const FLOAT_CHARGE_AMOUNT = 3
+
+var floatCharges = 0
 
 onready var bulletSpawnPost = $GravityGun/BulletSpawnPoint
 onready var sprite = $Sprite
@@ -41,3 +45,14 @@ func _input(event):
 		emit_signal("bullet_fired", get_global_mouse_position(), true)
 	else:
 		stateMachine.state.input(event)
+		
+		
+func addFloatCharge():
+	var val = floatCharges + 1
+	floatCharges = min (MAX_FLOAT_CHARGES, val)
+	if val <= MAX_FLOAT_CHARGES:
+		stateMachine.gravity -= FLOAT_CHARGE_AMOUNT
+		
+		
+func resetGravity():
+	stateMachine.resetGravity()

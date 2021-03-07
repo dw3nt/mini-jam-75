@@ -4,7 +4,7 @@ class_name PlayerStateMachine
 
 const HISTORY_LIMIT = 10
 
-const INITIAL_GRAVITY = 10
+const INITIAL_GRAVITY = 12
 const FRICTION = 1
 const MOVE_SPEED = 100
 const AIR_MOVE_SPEED = 80
@@ -93,6 +93,10 @@ func setFacingDirection(facing):
 	sprite.flip_h = facing < 0
 	gravityGun.scale.x = facing
 	gravityGun.position.x = facing * GRAVITY_GUN_INITIAL_POS.x
+	
+	
+func resetGravity():
+	gravity = INITIAL_GRAVITY
 	
 	
 func _on_FSM_Anim_animation_finished(anim_name):
