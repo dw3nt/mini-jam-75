@@ -12,6 +12,8 @@ var floatCharges = 0
 onready var bulletSpawnPost = $GravityGun/BulletSpawnPoint
 onready var sprite = $Sprite
 onready var stateMachine = $PlayerStateMachine
+onready var floatAudio = $FloatChargeAudio
+onready var resetAudio = $ResetFloatAudio
 
 
 func _ready():
@@ -54,7 +56,10 @@ func addFloatCharge():
 	floatCharges = min (MAX_FLOAT_CHARGES, val)
 	if val <= MAX_FLOAT_CHARGES:
 		stateMachine.gravity -= FLOAT_CHARGE_AMOUNT
+		floatAudio.play()
 		
 		
 func resetGravity():
+	floatCharges = 0
 	stateMachine.resetGravity()
+	resetAudio.play()

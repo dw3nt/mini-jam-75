@@ -50,6 +50,7 @@ func initLevel(newLevel):
 	currentLevel = newLevel
 	oldLevel.queue_free()
 	
+	player.resetGravity()
 	player.global_position = currentLevel.playerSpawnPos.position
 	levelGoal.global_position = currentLevel.goalSpawnPos.position
 	ammoLabel.text = str(currentLevel.floatAmmo)
